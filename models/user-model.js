@@ -1,18 +1,22 @@
-
+const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
-    fullname: String,
+    fullname: {
+        type: String,
+        minLenght: 3,
+        trim: true,
+    },
     email: String,
     password: String,
-    cart: [{
-        type: mongoose.Schema.Types.ObjectID,
-        ref: "product-model"
-    }],
+    cart: {
+        type: Array,
+        default: [],
+    },
     isAdmin: Boolean,
-    orders: [{
-        type: mogooose.Schema.Types.ObjectID,
-
-    }],
+    orders: {
+        type: Array,
+        default: [],
+    },
     contact: Number,
     picture: String
 });
