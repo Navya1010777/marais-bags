@@ -1,11 +1,16 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
+const dbgr = require('debug')('development:mongoose');
 
-mongoose.connect('mongodb://localhost:27017/marais-bags')
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017';
+const DB_NAME = 'marais-bags';
+
+mongoose.connect(`${MONGODB_URI}/${DB_NAME}`)
         .then(function() {
-            console.log('Connected to DB');
+            dbgr('Connected to DB');
         })
         .catch(function(err) {
-            console.log(err);
+            dbgr(err);
         })
 
 module.exports = mongoose.connection;
